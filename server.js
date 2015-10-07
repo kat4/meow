@@ -3,10 +3,8 @@
 var http = require('http');
 var fs = require('fs');
 var port = process.env.PORT || 8000;
-var index = fs.readFileSync(__dirname + '/public/index.html')
-// var redis = require('redis');
-// var client = redis.createClient();
-
+var index = fs.readFileSync(__dirname + '/public/index.html');
+var RedisMeow = require('./redis.js');
 var Server = (function() {
 
   function startServer() {
