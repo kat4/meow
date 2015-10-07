@@ -1,0 +1,22 @@
+{
+  "name": "meow",
+  "version": "1.0.0",
+  "description": "an app for people to share opinions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kat4/meow.git"
+  },
+  "keywords": [
+    "meow"
+  ],
+  "author": "kat4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kat4/meow/issues"
+  },
+  "homepage": "https://github.com/kat4/meow#readme"
+}
