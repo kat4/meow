@@ -10,3 +10,9 @@ function getMeowsCallback(data) {
 }
 
 getMeows(getMeowsCallback);
+
+var meowButton = document.getElementById('send-meow');
+
+meowButton.onclick = function postMeow() {
+  console.log('meow works');
+};

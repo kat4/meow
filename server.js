@@ -3,7 +3,7 @@
 var http = require('http');
 var fs = require('fs');
 var port = process.env.PORT || 8000;
-var index = fs.readFileSync(__dirname + '/public/index.html')
+var index = fs.readFileSync(__dirname + '/public/index.html');
 // var redis = require('redis');
 // var client = redis.createClient();
 
@@ -26,9 +26,9 @@ var Server = (function() {
         res.end('response');
       }
        else {
-        fs.readFile(__dirname + req.url, function(err, file) {
+        fs.readFile(__dirname +'/public' + req.url, function(err, file) {
           if (err) {
-            console.log('arm broken');
+            console.log(req.url);
             res.end('arm broken');
           } else {
             var ext = req.url.split('.')[1];
