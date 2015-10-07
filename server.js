@@ -4,8 +4,8 @@ var http = require('http');
 var fs = require('fs');
 var port = process.env.PORT || 8000;
 var index = fs.readFileSync(__dirname + '/public/index.html');
-// var redis = require('redis');
-// var client = redis.createClient();
+var redis = require('redis');
+var client = redis.createClient();
 
 var Server = (function() {
 
@@ -18,7 +18,7 @@ var Server = (function() {
     var urlArray = url.split('/');
 
     if (req.method === 'GET') {
-      if (urlArray.length == 2) {
+      if (url === '/') {
         res.end(index);
       }
       else if (urlArray[1] == 'meows') {
@@ -32,6 +32,8 @@ var Server = (function() {
             res.end('arm broken');
           } else {
             var ext = req.url.split('.')[1];
+            console.log(req.url);
+            console.log(ext);
             res.writeHead(200, {
               'Content-Type': 'text/' + ext
             });
@@ -41,6 +43,11 @@ var Server = (function() {
       }
 
     } else if (req.method === 'POST') {
+        var body = '';
+        req.on('data', function(chunk){
+          body += chunk;
+          console.log(body);
+        });
 
     }
   }
