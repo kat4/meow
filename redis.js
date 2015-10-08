@@ -10,7 +10,7 @@ var redisMeow = (function() {
         'body': 'five'
     };
     // var tempPostObj = JSON.stringify(pretempPostObj);
-    function postMeow(postObj) {
+    function postMeow(postObj, callback) {
         client.incr('postcounter', function(err, reply) {
             var thisPostIndex = reply;
             var redisPostObj = JSON.parse(postObj);
@@ -19,6 +19,7 @@ var redisMeow = (function() {
             });
             client.hgetall(thisPostIndex, function(err, object) {
                 console.log('htgetall returning', object);
+                callback(object);
             });
         });
     }

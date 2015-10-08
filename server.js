@@ -50,13 +50,21 @@ var Server = (function() {
             req.on('end', function() {
 
                 //store stuff in a list in redis
-                RedisMeow.postMeow(body, function(){
-                    res.end();
+                RedisMeow.postMeow(body, function(object){
+                  console.log("posted-meow");
+                    res.end(JSON.stringify(object));
                 });
 
             });
 
+        } else if (req.method === 'DELETE') {
+          console.log("delete request working");
+
+          res.end();
         }
+
+
+
     }
     return {
         startServer: startServer,

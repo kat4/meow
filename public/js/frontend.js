@@ -34,7 +34,12 @@ var frontend = (function () {
     console.log(deleteButtonArray);
 
     for (var j = 0; j < deleteButtonArray.length; j++) {
-      deleteButtonArray[j].addEventListener("click", function(){console.log('delete clicked')});
+      deleteButtonArray[j].addEventListener("click", deleteMeow);
+    }
+
+    function deleteMeow() {
+      this.parentNode.parentNode.removeChild(this.parentNode);
+      console.log('delete clicked eeeeeeeeeeeep');
     }
   }
 
@@ -67,13 +72,17 @@ var frontend = (function () {
 
     openPostReq.onreadystatechange = function()
     {
+
        if (openPostReq.readyState == 4 && openPostReq.status == 200)
        {
          console.log('meow meowed');
+         var data = JSON.parse(openPostReq.responseText);
+         console.log(data + "datas");
        }
      };
     openPostReq.open("POST", "/", true);
     openPostReq.send(stringifiedMeow);
+
     //consider that this should have a callback in case posting fails
     //something should be shown to the user
   }
@@ -95,6 +104,7 @@ var frontend = (function () {
   return {
     getMeows: getMeows,
     postMeow: postMeow,
+
     //deleteMeow: deleteMeow
   };
   }());
