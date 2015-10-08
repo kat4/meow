@@ -8,3 +8,6 @@ addons:
 
 notifications:
   email: false
+
+services:
+  - redis-server
