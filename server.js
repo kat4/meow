@@ -20,7 +20,7 @@ var Server = (function() {
             if (url === '/') {
                 res.end(index);
             } else if (urlArray[1] == 'meows') {
-                RedisMeow.getMeow(function(data){
+                RedisMeow.getMeow(function(data) {
                     res.end(data);
                 });
             } else {
@@ -38,20 +38,23 @@ var Server = (function() {
             }
 
         } else if (req.method === 'POST') {
-            console.log('POST running');
             var body = '';
             req.on('data', function(chunk) {
 
                 body += chunk;
                 //what if there are more chunks, you should end the request in the "end" handler
-                console.log("chunk", body);
+                //console.log("chunk", body);
             });
             //You should send a response anyway in the end handler
             req.on('end', function() {
-
                 //store stuff in a list in redis
-                RedisMeow.postMeow(body, function(){
-                    res.end();
+                RedisMeow.postMeow(body, function(err, reply) {
+                    if (err) {
+                        res.end(err);
+                    } else {
+                        res.writeHead(200);
+                        res.end();
+                    }
                 });
 
             });
