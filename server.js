@@ -1,16 +1,10 @@
 //declaring handler
 
-var http = require('http');
 var fs = require('fs');
-var port = process.env.PORT || 8000;
 var index = fs.readFileSync(__dirname + '/public/index.html');
 var RedisMeow = require('./redis.js');
 
 var Server = (function() {
-
-    function startServer() {
-        http.createServer(handler).listen(port);
-    }
 
     function handler(req, res) {
         var url = req.url;
@@ -54,7 +48,7 @@ var Server = (function() {
                 //store stuff in a list in redis
                 RedisMeow.postMeow(body, function() {
                     res.writeHead(200);
-                    res.end(); 
+                    res.end();
                 });
 
             });
@@ -62,7 +56,6 @@ var Server = (function() {
         }
     }
     return {
-        startServer: startServer,
         handler: handler
     };
 }());
