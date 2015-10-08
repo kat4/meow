@@ -8,56 +8,60 @@ var RedisMeow = require('./redis.js');
 
 var Server = (function() {
 
-  function startServer() {
-    http.createServer(handler).listen(port);
-  }
-
-  function handler(req, res) {
-    var url = req.url;
-    var urlArray = url.split('/');
-    console.log(urlArray);
-    if (req.method === 'GET') {
-      if (url === '/') {
-        res.end(index);
-      } else if (urlArray[1] == 'meows') {
-        RedisMeow.getMeow();
-      } else {
-        fs.readFile(__dirname + '/public' + req.url, function(err, file) {
-          if (err) {
-            res.end('arm broken');
-          } else {
-            var ext = req.url.split('.')[1];
-            res.writeHead(200, {
-              'Content-Type': 'text/' + ext
-            });
-          }
-          res.end(file);
-        });
-      }
-
-    } else if (req.method === 'POST') {
-        console.log('POST running');
-        var body = '';
-        req.on('data', function(chunk){
-
-          body += chunk;
-          //what if there are more chunks, you should end the request in the "end" handler
-          console.log("chunk", body);
-        });
-        //You should send a response anyway in the end handler
-        req.on('end', function() {
-
-          //store stuff in a list in redis
-          RedisMeow.postMeow(body);
-          res.end();
-        });
-
+    function startServer() {
+        http.createServer(handler).listen(port);
     }
-  }
-  return {
-    startServer: startServer,
-    handler: handler
-  };
+
+    function handler(req, res) {
+        var url = req.url;
+        var urlArray = url.split('/');
+        console.log(urlArray);
+        if (req.method === 'GET') {
+            if (url === '/') {
+                res.end(index);
+            } else if (urlArray[1] == 'meows') {
+                RedisMeow.getMeow(function(data){
+                    res.end(data);
+                });
+            } else {
+                fs.readFile(__dirname + '/public' + req.url, function(err, file) {
+                    if (err) {
+                        res.end('arm broken');
+                    } else {
+                        var ext = req.url.split('.')[1];
+                        res.writeHead(200, {
+                            'Content-Type': 'text/' + ext
+                        });
+                    }
+                    res.end(file);
+                });
+            }
+
+        } else if (req.method === 'POST') {
+            console.log('POST running');
+            var body = '';
+            req.on('data', function(chunk) {
+
+                body += chunk;
+                //what if there are more chunks, you should end the request in the "end" handler
+                console.log("chunk", body);
+            });
+            //You should send a response anyway in the end handler
+            req.on('end', function() {
+
+                //store stuff in a list in redis
+                RedisMeow.postMeow(body, function(){
+                    res.end();
+                });
+
+            });
+
+        }
+    }
+    return {
+        startServer: startServer,
+        handler: handler
+    };
 }());
 
 

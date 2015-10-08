@@ -6,7 +6,11 @@ var frontend = (function () {
   // you will also be able to use it in other projects
   function getMeows(callback){
     var openGetReq = new XMLHttpRequest();
-    openGetReq.addEventListener("load", callback);
+    openGetReq.onreadystatechange = function(){
+         if (openGetReq.readyState == 4 && openGetReq.status == 200){
+             callback(openGetReq.responseText);
+         }
+    };
     openGetReq.open("GET", "/meows", true);
     openGetReq.send();
   }
