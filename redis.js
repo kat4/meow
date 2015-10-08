@@ -2,48 +2,49 @@
 var redis = require('redis');
 var client = redis.createClient();
 
-// client.set('key1', 10, function() {
-//   client.incr('key1', function(err, reply) {
-//     console.log(reply); // 11
-//   });
-// });
-client.hmset('frameworks', 'javascript', 'AngularJS', 'css', 'Bootstrap', 'node', 'Express');
-client.hgetall('frameworks', function(err, object) {
-    console.log(object);
-});
 var redisMeow = (function() {
 
-  function postMeow() {
-    console.log('postmeow');
+    // var pretempPostObj = {
+    //     'cookie': '101021038',
+    //     'date': '2015-10-08',
+    //     'body': 'five'
+    // };
+    // var tempPostObj = JSON.stringify(pretempPostObj);
+    function postMeow(postObj) {
+        client.incr('postcounter', function(err, reply) {
+            var thisPostIndex = reply;
+            var redisPostObj = JSON.parse(postObj);
+            client.hmset(thisPostIndex, redisPostObj, function() {
+                console.log('hmset callback');
+            });
+            client.hgetall(thisPostIndex, function(err, object) {
+                console.log('htgetall returning', object);
+            });
+        });
+    }
+    // postMeow(tempPostObj);
+
+    function getMeow() {
+        client.get('postcounter', function(err, reply) {
+            var totalPosts = reply;
+            console.log('total posts = ', totalPosts);
+            for (var i = totalPosts; i > 6; i--) {
+                //callback(i);
+            }
+        });
+    }
+    //getMeow();
+
+    function deleteMeow() {
 
 
-  }
+    }
 
-
-  function getMeow() {
-    console.log('hi');
-    client.hgetall('meows', 0, -1, function(err, reply) {
-      if (err) {
-        console.log('nothing found...');
-      } else {
-        var list = reply.toString();
-        console.log(reply);
-        response.end('test' + list);
-      }
-    });
-
-  }
-
-  function deleteMeow() {
-
-
-  }
-
-  return {
-    postMeow: postMeow,
-    getMeow: getMeow,
-    deleteMeow: deleteMeow
-  };
+    return {
+        postMeow: postMeow,
+        getMeow: getMeow,
+        deleteMeow: deleteMeow
+    };
 
 
 })();
