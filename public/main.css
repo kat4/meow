@@ -1,7 +1,23 @@
+.container {
+  width: 60%;
+  margin: 0 auto;
+  box-shadow:  gray;
+}
+
 #meow-content {
-  height: 20%;
+  resize: none;
 }
 
 body {
-  background-color: blue;
+  background-color: #E5E4E2;
+}
+
+.meowBoxes {
+  margin: 1em;
+  background-color: #E5E4E2;
+  padding: 1em;
+}
+
+.delete-meow {
+
 }

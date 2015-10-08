@@ -14,7 +14,11 @@ var redisMeow = (function() {
             var thisPostIndex = reply;
             var redisPostObj = JSON.parse(postObj);
             client.hmset(thisPostIndex, redisPostObj, function() {
-                callback();
+              client.hgetall(thisPostIndex, function(err, object) {
+                  console.log('htgetall returning', object);
+                  callback();
+              });
+
             });
         });
     }

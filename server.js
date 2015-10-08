@@ -46,14 +46,23 @@ var Server = (function() {
             //You should send a response anyway in the end handler
             req.on('end', function() {
                 //store stuff in a list in redis
-                RedisMeow.postMeow(body, function() {
-                    res.writeHead(200);
-                    res.end();
+
+                RedisMeow.postMeow(body, function(){
+                    RedisMeow.getMeow(function(data) {
+                        res.end(data);
+                    });
                 });
 
             });
 
+        } else if (req.method === 'DELETE') {
+          console.log("delete request working");
+
+          res.end();
         }
+
+
+
     }
     return {
         handler: handler

@@ -17,6 +17,32 @@ var frontend = (function () {
 
   function getMeowsCallback(data) {
     console.log(data);
+    var catBasket = document.getElementsByClassName('cat-basket');
+    var parsedMeow = JSON.parse(data);
+    var growingBasket = "";
+    for (var i = 0; i < parsedMeow.length; i++) {
+        thisMeow = parsedMeow[i];
+        growingBasket += meowBox(thisMeow.content, thisMeow.date.slice(0,10)+' '+thisMeow.date.slice(11,16));
+
+    }
+
+    catBasket[0].innerHTML = growingBasket;
+
+    var deleteButtonArray = document.getElementsByClassName('delete-meow');
+
+    for (var j = 0; j < deleteButtonArray.length; j++) {
+      deleteButtonArray[j].addEventListener("click", deleteMeow);
+    }
+
+    function deleteMeow() {
+      this.parentNode.parentNode.removeChild(this.parentNode);
+      console.log('delete clicked eeeeeeeeeeeep');
+    }
+  }
+
+
+  function meowBox(content, date) {
+    return "<div class = \"meowBoxes\"><span>" + date + "</span><p>" + content + "</p><input class=\"delete-meow\" type=\"button\" value=\"DeleteMeow\"></div>";
   }
 
   getMeows(getMeowsCallback);
@@ -24,26 +50,30 @@ var frontend = (function () {
   //post meows
   var meowButton = document.getElementById('send-meow');
 
-  meowButton.addEventListener("click", postMeow);
+  meowButton.addEventListener("click", function() {postMeow(getMeowsCallback);});
 
-  function postMeow() {
+  function postMeow(callback) {
     var openPostReq = new XMLHttpRequest();
     var stringifiedMeow = collectMeow();
-    console.log(stringifiedMeow);
 
     openPostReq.onreadystatechange = function()
     {
+
        if (openPostReq.readyState == 4 && openPostReq.status == 200)
        {
          console.log('meow meowed');
+         var data = JSON.parse(openPostReq.responseText);
+         callback(openPostReq.responseText);
        }
      };
     openPostReq.open("POST", "/", true);
     openPostReq.send(stringifiedMeow);
+
     //consider that this should have a callback in case posting fails
     //something should be shown to the user
   }
 
+  //create js object for date, cookie and content and stringify->send to backend
   function collectMeow() {
     var meowContent = document.getElementById('meow-content').value;
     var meowDate = new Date();
@@ -54,12 +84,13 @@ var frontend = (function () {
       content: meowContent
     };
     return JSON.stringify(meowObject);
-    //create js object for date, cookie and content and stringify->send
-  }
 
+  }
 
   return {
     getMeows: getMeows,
-    postMeow: postMeow
+    postMeow: postMeow,
+
+    //deleteMeow: deleteMeow
   };
   }());
