@@ -17,6 +17,40 @@ var frontend = (function () {
 
   function getMeowsCallback(data) {
     console.log(data);
+    var catBasket = document.getElementsByClassName('cat-basket');
+    var parsedMeow = JSON.parse(data);
+    console.log(parsedMeow);
+    var growingBasket = "";
+    for (var i = 0; i < parsedMeow.length; i++) {
+        thisMeow = parsedMeow[i];
+        growingBasket += meowBox(thisMeow.content, thisMeow.date.slice(0,10)+' '+thisMeow.date.slice(11,16));
+
+    }
+
+    console.log(growingBasket);
+    catBasket[0].innerHTML = growingBasket;
+
+    var deleteButtonArray = document.getElementsByClassName('delete-meow');
+    console.log(deleteButtonArray);
+
+    for (var j = 0; j < deleteButtonArray.length; j++) {
+      deleteButtonArray[j].addEventListener("click", function(){console.log('delete clicked')});
+    }
+  }
+
+
+
+  //delete meow
+  // function deleteMeow () {
+  //   //this.parentNode.removeChild(this);
+  //   console.log('delete btn clicked');
+  // }
+
+  function meowBox(content, date) {
+    return "<div class = \"meowBoxes\"><span>" + date + "</span><p>" + content + "</p><input class=\"delete-meow\" type=\"button\" value=\"DeleteMeow\"></div>";
+    // var deleteButton = document.getElementsByClassName('delete-meow');
+    // console.log(deleteButton);
+    // deleteButton[].addEventListener("click", deleteMeow);
   }
 
   getMeows(getMeowsCallback);
@@ -44,6 +78,7 @@ var frontend = (function () {
     //something should be shown to the user
   }
 
+  //create js object for date, cookie and content and stringify->send to backend
   function collectMeow() {
     var meowContent = document.getElementById('meow-content').value;
     var meowDate = new Date();
@@ -54,12 +89,12 @@ var frontend = (function () {
       content: meowContent
     };
     return JSON.stringify(meowObject);
-    //create js object for date, cookie and content and stringify->send
-  }
 
+  }
 
   return {
     getMeows: getMeows,
-    postMeow: postMeow
+    postMeow: postMeow,
+    //deleteMeow: deleteMeow
   };
   }());
