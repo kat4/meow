@@ -1,6 +1,6 @@
 // redis functions
 var redis = require('redis');
-var client = redis.createClient();
+var client = require('redis').createClient(process.env.REDIS_URL);
 var redisMeow = (function() {
 
     function postMeow(postObj, callback) {
