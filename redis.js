@@ -2,36 +2,51 @@
 var redis = require('redis');
 var client = redis.createClient();
 
-
-// client.hmset('frameworks', {
-//     'cookie': 'blahblachblah',
-//     'date': 'thedateortime',
-//     'body': 'meowmeowmeow'
+// client.set('key1', 10, function() {
+//   client.incr('key1', function(err, reply) {
+//     console.log(reply); // 11
+//   });
 // });
-
+client.hmset('frameworks', 'javascript', 'AngularJS', 'css', 'Bootstrap', 'node', 'Express');
+client.hgetall('frameworks', function(err, object) {
+    console.log(object);
+});
 var redisMeow = (function() {
-    function postMeow() {
+
+  function postMeow() {
+    console.log('postmeow');
 
 
-    }
-
-    function getMeow(cook) {
+  }
 
 
-    }
+  function getMeow() {
+    console.log('hi');
+    client.hgetall('meows', 0, -1, function(err, reply) {
+      if (err) {
+        console.log('nothing found...');
+      } else {
+        var list = reply.toString();
+        console.log(reply);
+        response.end('test' + list);
+      }
+    });
 
-    function deleteMeow(){
+  }
+
+  function deleteMeow() {
 
 
-    }
+  }
 
-    return {
-        postMeow: postMeow,
-        getMeow: getMeow,
-        deleteMeow: deleteMeow
-    };
+  return {
+    postMeow: postMeow,
+    getMeow: getMeow,
+    deleteMeow: deleteMeow
+  };
 
 
 })();
 
-module.export = redisMeow;
+
+module.exports = redisMeow;

@@ -14,17 +14,16 @@ var Server = (function() {
   function handler(req, res) {
     var url = req.url;
     var urlArray = url.split('/');
-
+    console.log(urlArray);
     if (req.method === 'GET') {
-      if (urlArray.length == 2) {
+      if (urlArray.length === 2 && urlArray[1] === '') {
         res.end(index);
-      }
-      else if (urlArray[1] == 'meows') {
+      } else if (urlArray[1] == 'meows') {
         console.log('hello' + urlArray);
-        res.end('response');
-      }
-       else {
-        fs.readFile(__dirname + req.url, function(err, file) {
+        RedisMeow.postMeow();
+        RedisMeow.getMeow();
+      } else {
+        fs.readFile(__dirname + '/public' + req.url, function(err, file) {
           if (err) {
             console.log('arm broken');
             res.end('arm broken');
@@ -42,9 +41,9 @@ var Server = (function() {
 
     }
   }
-    return {
-      startServer: startServer,
-      handler: handler
+  return {
+    startServer: startServer,
+    handler: handler
   };
 }());
 
