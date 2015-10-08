@@ -13,6 +13,7 @@ var redisMeow = (function() {
             }
             var thisPostIndex = reply;
             var redisPostObj = JSON.parse(postObj);
+            redisPostObj.key = thisPostIndex;
             client.hmset(thisPostIndex, redisPostObj, function() {
               client.hgetall(thisPostIndex, function(err, object) {
                   console.log('htgetall returning', object);
