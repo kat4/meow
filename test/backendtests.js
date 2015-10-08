@@ -7,6 +7,24 @@ test("check back end test set-up, 1 equals 1", function(t) {
     t.equal(1, 1, "success!");
     t.end();
 });
+test("Testing request for frontend.js file", function(t) {
+    shot.inject(Server.handler, {
+        method: "GET",
+        url: '/js/frontend.js'
+    }, function(res) {
+        t.equal(res.statusCode, 200, "...");
+        t.end();
+    });
+});
+test("Testing request for non existant file", function(t) {
+    shot.inject(Server.handler, {
+        method: "GET",
+        url: '/js/kat4writesthebesttests13374204lyfe.js'
+    }, function(res) {
+        t.equal(res.statusCode, 404, "...");
+        t.end();
+    });
+});
 test("Testing endpoint /meows for a reponse of type array", function(t) {
     shot.inject(Server.handler, {
         method: "GET",

@@ -18,6 +18,9 @@ var Server = (function() {
         console.log(urlArray);
         if (req.method === 'GET') {
             if (url === '/') {
+                res.writeHead(200, {
+                    'Content-Type': 'text/html'
+                });
                 res.end(index);
             } else if (urlArray[1] == 'meows') {
                 RedisMeow.getMeow(function(data) {
@@ -26,14 +29,15 @@ var Server = (function() {
             } else {
                 fs.readFile(__dirname + '/public' + req.url, function(err, file) {
                     if (err) {
+                        res.writeHead(404);
                         res.end('arm broken');
                     } else {
                         var ext = req.url.split('.')[1];
                         res.writeHead(200, {
                             'Content-Type': 'text/' + ext
                         });
+                        res.end(file);
                     }
-                    res.end(file);
                 });
             }
 
@@ -48,13 +52,9 @@ var Server = (function() {
             //You should send a response anyway in the end handler
             req.on('end', function() {
                 //store stuff in a list in redis
-                RedisMeow.postMeow(body, function(err, reply) {
-                    if (err) {
-                        res.end(err);
-                    } else {
-                        res.writeHead(200);
-                        res.end();
-                    }
+                RedisMeow.postMeow(body, function() {
+                    res.writeHead(200);
+                    res.end();
                 });
 
             });
