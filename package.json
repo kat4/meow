@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/kat4/meow/issues"
   },
-  "homepage": "https://github.com/kat4/meow#readme"
+  "homepage": "https://github.com/kat4/meow#readme",
+  "dependencies": {
+    "hiredis": "^0.4.1",
+    "redis": "^2.1.0"
+  }
 }
