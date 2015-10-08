@@ -22,18 +22,18 @@ var Server = (function() {
         res.end(index);
       }
       else if (urlArray[1] == 'meows') {
-        console.log('hello' + urlArray);
         res.end('response');
       }
        else {
+         //I recommend you extract this into a separate function
+         // called serve_static to make this handler more readable
         fs.readFile(__dirname +'/public' + req.url, function(err, file) {
           if (err) {
             console.log(req.url);
             res.end('arm broken');
           } else {
             var ext = req.url.split('.')[1];
-            console.log(req.url);
-            console.log(ext);
+            console.log(req.url + 'get request OK');
             res.writeHead(200, {
               'Content-Type': 'text/' + ext
             });
@@ -43,10 +43,20 @@ var Server = (function() {
       }
 
     } else if (req.method === 'POST') {
+        console.log('POST running');
         var body = '';
         req.on('data', function(chunk){
+
           body += chunk;
-          console.log(body);
+          //what if there are more chunks, you should end the request in the "end" handler
+          console.log("chunk", body);
+        });
+        //You should send a response anyway in the end handler
+        req.on('end', function() {
+
+          //store stuff in a list in redis
+
+          res.end(body);
         });
 
     }
