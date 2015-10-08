@@ -1,19 +1,27 @@
 var test = require('tape');
 var shot = require('shot');
-var serverFile = require('../server.js');
+var Server = require('../server.js');
 
-test("check back end test set-up, 1 equals 1", function(t) {
-  t.equal(1, 1, "success!");
-  t.end();
-});
-test("server sends a response", function(t) {
-  var req = {
-    method: "GET",
-    url: '/meows'
-  };
-  shot.inject(serverFile.handler, req, function(res) {
-
-    t.equal(!!res.responseText, true, "success!");
-    t.end();
-  });
-});
+// test("check back end test set-up, 1 equals 1", function(t) {
+//     t.equal(1, 1, "success!");
+//     t.end();
+// });
+// test("Testing endpoint /meows for a reponse of type array", function(t) {
+//     shot.inject(Server.handler, {
+//         method: "GET",
+//         url: '/meows'
+//     }, function(res) {
+//         t.equal(Array.isArray(JSON.parse(res.payload)) , true, "success!");
+//         t.end();
+//     });
+// });
+// test("Testing endpoint / for response", function(t) {
+//     shot.inject(Server.handler, {
+//         method: "GET",
+//         url: '/'
+//     }, function(res) {
+//         console.log(res.payload.substring(0,15));
+//         t.equal(res.payload.substring(0,15) , '<!DOCTYPE html>', "...");
+//         t.end();
+//     });
+// });
