@@ -54,7 +54,7 @@ var Server = (function() {
                 //store stuff in a list in redis
                 RedisMeow.postMeow(body, function() {
                     res.writeHead(200);
-                    res.end();
+                    res.end(); 
                 });
 
             });
