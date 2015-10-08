@@ -4,11 +4,11 @@ var client = redis.createClient();
 
 var redisMeow = (function() {
 
-    // var pretempPostObj = {
-    //     'cookie': '101021038',
-    //     'date': '2015-10-08',
-    //     'body': 'five'
-    // };
+    var pretempPostObj = {
+        'cookie': '101021038',
+        'date': '2015-10-08',
+        'body': 'five'
+    };
     // var tempPostObj = JSON.stringify(pretempPostObj);
     function postMeow(postObj) {
         client.incr('postcounter', function(err, reply) {
@@ -24,13 +24,23 @@ var redisMeow = (function() {
     }
     // postMeow(tempPostObj);
 
-    function getMeow() {
+    function getMeow(callback) {
         client.get('postcounter', function(err, reply) {
-            var totalPosts = reply;
-            console.log('total posts = ', totalPosts);
-            for (var i = totalPosts; i > 6; i--) {
-                //callback(i);
-            }
+            var i = reply;
+            console.log('total posts = ', i);
+            //var postIndexArray= [];
+            client.multi()
+
+            .hgetall(i)
+            .hgetall(i-1)
+            .hgetall(i-2)
+            .hgetall(i-3)
+            .hgetall(i-4)
+            .hgetall(i-5)
+            .exec(function(err,replies){
+                console.log('multi output =    ',replies);
+                callback(JSON.stringify(replies));
+            });
         });
     }
     //getMeow();
