@@ -1,7 +1,6 @@
 // redis functions
 var redis = require('redis');
 var client = redis.createClient();
-
 var redisMeow = (function() {
 
     var pretempPostObj = {
@@ -53,7 +52,8 @@ var redisMeow = (function() {
     return {
         postMeow: postMeow,
         getMeow: getMeow,
-        deleteMeow: deleteMeow
+        deleteMeow: deleteMeow,
+        client: client
     };
 
 
