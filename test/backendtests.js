@@ -12,9 +12,8 @@ test("Testing endpoint /meows for a reponse of type array", function(t) {
         method: "GET",
         url: '/meows'
     }, function(res) {
-        t.equal(Array.isArray(JSON.parse(res.payload)) , true, "success!");
+        t.equal(Array.isArray(JSON.parse(res.payload)), true, "success!");
         t.end();
-        RedisMeow.client.quit();
     });
 });
 test("Testing endpoint / for response", function(t) {
@@ -22,8 +21,22 @@ test("Testing endpoint / for response", function(t) {
         method: "GET",
         url: '/'
     }, function(res) {
-        console.log(res.payload.substring(0,15));
-        t.equal(res.payload.substring(0,15) , '<!DOCTYPE html>', "...");
+        console.log(res.payload.substring(0, 15));
+        t.equal(res.payload.substring(0, 15), '<!DOCTYPE html>', "...");
+        t.end();
+    });
+});
+test("Testing POST request at /", function(t) {
+    shot.inject(Server.handler, {
+        method: "POST",
+        url: '/',
+        payload: JSON.stringify({
+            cookie: '101021038',
+            date: '2015-10-08',
+            body: 'five'
+        })
+    }, function(res) {
+        t.equal(res.statusCode, 200, "...");
         t.end();
         RedisMeow.client.quit();
     });
