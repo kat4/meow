@@ -4,7 +4,9 @@
   "description": "an app for people to share opinions",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/tape ./test/*"
+    "test": "./node_modules/.bin/tape ./test/*",
+    "coverage": "istanbul cover ./node_modules/.bin/tape ./test/*",
+    "codeclimate": "CODECLIMATE_REPO_TOKEN=ac059f38fbec9fcf6b517790cef744bb720d226a3724cc1ca24b2c730e4837e7 codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "redis": "^2.1.0"
   },
   "devDependencies": {
+    "istanbul": "^0.3.22",
     "shot": "^1.7.0",
     "tape": "^4.2.1"
   }
