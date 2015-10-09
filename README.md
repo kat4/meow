@@ -5,6 +5,9 @@
 
 An app for people to share opinions in just 140 characters. To view our Heroku hosted app [https://meow-kat.herokuapp.com/](https://meow-kat.herokuapp.com/)
 
+Our opening plan, in which we detailed the functionality and functions needed to meet the requirements. 
+![readme white board outline](https://files.gitter.im/kat4/fac6d1/k5pM/thumb/IMG_20151009_101637.jpg "readme")
+
 ##Run locally
 
 - Make sure you have Node.js installed.
