@@ -8,6 +8,20 @@ An app for people to share opinions in just 140 characters. To view our Heroku h
 Our opening plan, in which we detailed the functionality and functions needed to meet the requirements. 
 ![readme white board outline](https://files.gitter.im/kat4/fac6d1/k5pM/thumb/IMG_20151009_101637.jpg "readme")
 
+##Basic Requirements
+- [X] Create, Read and Delete functionality for posts. Removing from front-end site and back-end database.
+      - [X]Create
+      - [X]Read
+      - []Delete
+- [X] Use Redis on the back-end for the database. 
+- [] Use cookies so only the poster can delete their tweets.
+- [X] Real-time Updates of tweets.
+- [X] Testing & 80% code coverage.
+
+##Who we are
+- A team of trainee developers at Founders & Coders. This our week 4 project. To see our other projects go to our [repo](https://github.com/kat4) and have a look at [wordkat](https://github.com/kat4/wordkat) and [instaground](https://github.com/kat4/instaground).
+- We are Kata, Katerina, Josh and Matt.
+
 ##Run locally
 
 - Make sure you have Node.js installed.
@@ -18,3 +32,4 @@ Our opening plan, in which we detailed the functionality and functions needed to
 - Access site on localhost:8000
 
 To see our file structure crystal click on the codecrystal badge at the top of our repo or here> [kat4 crystal](http://codecrystal.herokuapp.com/crystalise/kat4/meow/master)
+
