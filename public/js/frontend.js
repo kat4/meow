@@ -101,6 +101,6 @@ var frontend = (function() {
     return {
         getMeows: getMeows,
         postMeow: postMeow,
-
     };
+    
 }());
