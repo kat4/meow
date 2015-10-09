@@ -13,12 +13,13 @@ var redisMeow = (function() {
             }
             var thisPostIndex = reply;
             var redisPostObj = JSON.parse(postObj);
+            // NEW ADDITIONS
             redisPostObj.key = thisPostIndex;
+            client.lpush(['keys', thisPostIndex], function(err, reply) {
+                console.log('reply from lpush ..... = ......' + reply);
+            });
             client.hmset(thisPostIndex, redisPostObj, function() {
-                client.hgetall(thisPostIndex, function(err, object) {
-                    console.log('htgetall returning', object);
-                    callback();
-                });
+                callback();
             });
         });
     }
@@ -27,30 +28,34 @@ var redisMeow = (function() {
         client.get('postcounter', function(err, reply) {
             //var i = reply;
             var multi = client.multi();
-            for(var j=reply; j>reply-6 ; j-- ){
-                client.hgetall(j, function(err,reply){
-                    console.log('DOES J HAVE ANYTHING INSIDE???',reply);
-                    // if reply == null, move on to next j?????
+            var keysToGet = [];
+            client.lrange('keys', 0, 6, function(err, reply) {
+                keysToGet = reply;
+                console.log('keysToGet =========', keysToGet);
+                keysToGet.forEach(function(thisKey) {
+                    console.log('this key', thisKey);
+                    multi.hgetall(thisKey);
                 });
-                multi.hgetall(j);
-            }
-            // .hgetall(i)
-            //     .hgetall(i - 1)
-            //     .hgetall(i - 2)
-            //     .hgetall(i - 3)
-            //     .hgetall(i - 4)
-            //     .hgetall(i - 5)
                 multi.exec(function(err, replies) {
                     console.log('multi output =    ', replies);
                     callback(JSON.stringify(replies));
                 });
+            });
         });
     }
 
     function deleteMeow(key, callback) {
-        client.del(key, function(error, reply) {
-            console.log(reply);
-                callback();
+        console.log('KEY TO DELETE =', key);
+        client.lrem('keys', 0, key, function(err, reply) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(reply);
+                client.del(key, function(error, reply) {
+                    console.log(reply);
+                    callback();
+                });
+            }
         });
 
     }
