@@ -1,9 +1,6 @@
 var frontend = (function() {
-    //I suggest you apply the 3-strikes rule:
-    //if you repeat the code below(call to xmlhttprequest) the
-    // third time you should refactor it into a function like
-    // ajaxcall(method, url, data, callback)
-    // you will also be able to use it in other projects
+
+    // http request for meows
     function getMeows(callback) {
         var openGetReq = new XMLHttpRequest();
         openGetReq.onreadystatechange = function() {
@@ -15,6 +12,7 @@ var frontend = (function() {
         openGetReq.send();
     }
 
+    // callback to run each time we want to fetch meows
     function getMeowsCallback(data) {
         var catBasket = document.getElementsByClassName('cat-basket');
         var parsedMeow = JSON.parse(data);
@@ -27,14 +25,6 @@ var frontend = (function() {
 
         catBasket[0].innerHTML = growingBasket;
 
-        var deleteButtonArray = document.getElementsByClassName('delete-meow');
-
-        for (var j = 0; j < deleteButtonArray.length; j++) {
-            deleteButtonArray[j].addEventListener("click", function() {
-                var _this = this;
-                deleteMeow(getMeowsCallback, _this);
-            });
-        }
     }
 
     function deleteMeow(callback, _this) {
@@ -57,14 +47,22 @@ var frontend = (function() {
         return "<div class = \"meowBoxes\"><span>" + date + "</span><p>" + content + "</p><input class=\"delete-meow\" type=\"button\" value=\"DeleteMeow\"><span class=\"meow-key hidden\" >" + key + "</span></div>";
     }
 
-    getMeows(getMeowsCallback);
-
     //post meows
     var meowButton = document.getElementById('send-meow');
 
     meowButton.addEventListener("click", function() {
         postMeow(getMeowsCallback);
     });
+
+    var deleteButtonArray = document.getElementsByClassName('delete-meow');
+
+    for (var j = 0; j < deleteButtonArray.length; j++) {
+        deleteButtonArray[j].addEventListener("click", function() {
+            var _this = this;
+            deleteMeow(getMeowsCallback, _this);
+        });
+    }
+
 
     function postMeow(callback) {
         var openPostReq = new XMLHttpRequest();
@@ -98,9 +96,12 @@ var frontend = (function() {
 
     }
 
+    // THIS SHOULD BE ON PAGE LOAD OR SOMETHING //
+    getMeows(getMeowsCallback);
+
     return {
         getMeows: getMeows,
         postMeow: postMeow,
-
     };
+
 }());
