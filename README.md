@@ -17,3 +17,4 @@ Our opening plan, in which we detailed the functionality and functions needed to
 - In another open redis with the command redis-server. You can check it's working by typing: redis-cli ping.
 - Access site on localhost:8000
 
+To see our file structure crystal click on the codecrystal badge at the top of our repo or here> [kat4 crystal](http://codecrystal.herokuapp.com/crystalise/kat4/meow/master)
