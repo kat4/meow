@@ -10,10 +10,10 @@ Our opening plan, in which we detailed the functionality and functions needed to
 
 ##Basic Requirements
 - [X] Create, Read and Delete functionality for posts. Removing from front-end site and back-end database.
-      [X]Create
-      [X]Read
-      []Delete
-- [X] Use Redis on the back-end for the database.
+      - [X]Create
+      - [X]Read
+      - []Delete
+- [X] Use Redis on the back-end for the database. 
 - [] Use cookies so only the poster can delete their tweets.
 - [X] Real-time Updates of tweets.
 - [X] Testing & 80% code coverage.
