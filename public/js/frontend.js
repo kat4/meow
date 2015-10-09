@@ -1,9 +1,4 @@
 var frontend = (function () {
-  //I suggest you apply the 3-strikes rule:
-  //if you repeat the code below(call to xmlhttprequest) the
-  // third time you should refactor it into a function like
-  // ajaxcall(method, url, data, callback)
-  // you will also be able to use it in other projects
   function getMeows(callback){
     var openGetReq = new XMLHttpRequest();
     openGetReq.onreadystatechange = function(){
@@ -16,7 +11,6 @@ var frontend = (function () {
   }
 
   function getMeowsCallback(data) {
-    console.log(data);
     var catBasket = document.getElementsByClassName('cat-basket');
     var parsedMeow = JSON.parse(data);
     var growingBasket = "";
@@ -36,7 +30,6 @@ var frontend = (function () {
 
     function deleteMeow() {
       this.parentNode.parentNode.removeChild(this.parentNode);
-      console.log('delete clicked eeeeeeeeeeeep');
     }
   }
 
@@ -61,16 +54,12 @@ var frontend = (function () {
 
        if (openPostReq.readyState == 4 && openPostReq.status == 200)
        {
-         console.log('meow meowed');
          var data = JSON.parse(openPostReq.responseText);
          callback(openPostReq.responseText);
        }
      };
     openPostReq.open("POST", "/", true);
     openPostReq.send(stringifiedMeow);
-
-    //consider that this should have a callback in case posting fails
-    //something should be shown to the user
   }
 
   //create js object for date, cookie and content and stringify->send to backend

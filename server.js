@@ -9,7 +9,6 @@ var Server = (function() {
     function handler(req, res) {
         var url = req.url;
         var urlArray = url.split('/');
-        console.log(urlArray);
         if (req.method === 'GET') {
             if (url === '/') {
                 res.writeHead(200, {
@@ -56,7 +55,6 @@ var Server = (function() {
             });
 
         } else if (req.method === 'DELETE') {
-          console.log("delete request working");
 
           res.end();
         }

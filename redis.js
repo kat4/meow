@@ -6,10 +6,7 @@ var redisMeow = (function() {
     function postMeow(postObj, callback) {
         client.incr('postcounter', function(err, reply) {
             if (err) {
-                // We created this error handler to find out why redis was hanging.
-                // However it is incredibly difficult to test this, so we've commented
-                // it out.
-                //console.log("ERROR +++++++", err);
+                console.log("ERROR +++++++", err);
             }
             var thisPostIndex = reply;
             var redisPostObj = JSON.parse(postObj);
@@ -36,7 +33,6 @@ var redisMeow = (function() {
                 .hgetall(i - 4)
                 .hgetall(i - 5)
                 .exec(function(err, replies) {
-                    console.log('multi output =    ', replies);
                     callback(JSON.stringify(replies));
                 });
         });
