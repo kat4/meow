@@ -1,23 +1,27 @@
 .container {
-  width: 60%;
-  margin: 0 auto;
-  box-shadow:  gray;
+    width: 60%;
+    margin: 0 auto;
+    box-shadow: gray;
 }
-
 #meow-content {
-  resize: none;
+    resize: none;
 }
-
 body {
-  background-color: #E5E4E2;
+    font-family: helvetica, arial, sans-serif;
 }
-
 .meowBoxes {
-  margin: 1em;
-  background-color: #E5E4E2;
-  padding: 1em;
+    margin: 1em;
+    padding: 1em;
 }
-
-.delete-meow {
-
+.delete-meow {}
+input {
+    background: rgba(50, 50, 50, 0.4);
+    padding: 8px 15px;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.hidden{
+    display:none;
 }
