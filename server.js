@@ -46,7 +46,7 @@ var Server = (function() {
             req.on('end', function() {
                 //store stuff in a list in redis
 
-                RedisMeow.postMeow(body, function(){
+                RedisMeow.postMeow(body, function() {
                     RedisMeow.getMeow(function(data) {
                         res.end(data);
                     });
@@ -55,12 +55,14 @@ var Server = (function() {
             });
 
         } else if (req.method === 'DELETE') {
-
-          res.end();
+            var key = urlArray[1];
+            console.log("delete request working");
+            RedisMeow.deleteMeow(key, function() {
+                RedisMeow.getMeow(function(data) {
+                    res.end(data);
+                });
+            });
         }
-
-
-
     }
     return {
         handler: handler
