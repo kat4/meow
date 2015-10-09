@@ -22,11 +22,11 @@ var frontend = (function() {
         var growingBasket = "";
         for (var i = 0; i < parsedMeow.length; i++) {
             thisMeow = parsedMeow[i];
-            //growingBasket += meowBox(thisMeow.content, thisMeow.date.slice(0, 10) + ' ' + thisMeow.date.slice(11, 16), thisMeow.key);
+            growingBasket += meowBox(thisMeow.content, thisMeow.date.slice(0, 10) + ' ' + thisMeow.date.slice(11, 16), thisMeow.key);
 
         }
 
-        //catBasket[0].innerHTML = growingBasket;
+        catBasket[0].innerHTML = growingBasket;
 
         var deleteButtonArray = document.getElementsByClassName('delete-meow');
 
