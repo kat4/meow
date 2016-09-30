@@ -2,25 +2,38 @@
     width: 60%;
     margin: 0 auto;
     box-shadow: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #meow-content {
     resize: none;
+    border: 2px solid black;
 }
 body {
     font-family: helvetica, arial, sans-serif;
 }
+h1{
+    font-family: 'Black Ops One', cursive;
+    text-align: center:
+}
 .meowBoxes {
     margin: 1em;
     padding: 1em;
+    border: 2px solid black;
 }
 .delete-meow {}
 input {
-    background: rgba(50, 50, 50, 0.4);
+    background: black;
     padding: 8px 15px;
     border: 0;
     color: white;
     font-weight: bold;
     font-size: 0.8em;
+    width: 40%;
+    min-width: 100px;
+
 }
 .hidden{
     display:none;
