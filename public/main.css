@@ -1,27 +1,35 @@
 .container {
-    width: 60%;
-    margin: 0 auto;
+    background: white;
+    width: 70%;
+    margin: 5% auto;
     box-shadow: gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Lato', sans-serif; 
 }
 #meow-content {
     resize: none;
     border: 2px solid black;
+    text-align: center;
 }
 body {
+    background-attachment: fixed;
+    background-image: url('beststripe.jpg');
+    background-size: cover;
     font-family: helvetica, arial, sans-serif;
 }
-h1{
+.banner {
     font-family: 'Black Ops One', cursive;
-    text-align: center:
+    text-align: center;
+    font-size: 3em;
 }
 .meowBoxes {
     margin: 1em;
     padding: 1em;
     border: 2px solid black;
+    text-align: center;
 }
 .delete-meow {}
 input {
@@ -35,6 +43,6 @@ input {
     min-width: 100px;
 
 }
-.hidden{
+.hidden {
     display:none;
 }
