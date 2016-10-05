@@ -10,7 +10,7 @@
     font-family: 'Lato', sans-serif;
 }
 #meow-content {
-    resize: none;
+    width: 70%;
     border: 2px solid black;
     text-align: center;
 }
@@ -31,7 +31,6 @@ body {
     border: 2px solid black;
     text-align: center;
 }
-.delete-meow {}
 input {
     background: black;
     padding: 8px 15px;
@@ -45,4 +44,12 @@ input {
 }
 .hidden {
     display:none;
+}
+@media (max-width: 500px) {
+  img {
+    max-width: 100%;
+  }
+  .cat-basket {
+      width: 100%;
+  }
 }
