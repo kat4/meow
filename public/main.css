@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Lato', sans-serif; 
+    font-family: 'Lato', sans-serif;
 }
 #meow-content {
     resize: none;
@@ -41,7 +41,7 @@ input {
     font-size: 0.8em;
     width: 40%;
     min-width: 100px;
-
+    margin: 5px;
 }
 .hidden {
     display:none;

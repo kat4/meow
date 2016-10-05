@@ -3,9 +3,9 @@
 [![Test Coverage](https://codeclimate.com/github/kat4/meow/badges/coverage.svg)](https://codeclimate.com/github/kat4/meow/coverage)
 [![Codecrystal](https://img.shields.io/badge/code-crystal-5CB3FF.svg)](http://codecrystal.herokuapp.com/crystalise/kat4/meow/master)
 
-An app for people to share opinions in just 140 characters. To view our Heroku hosted app [https://meow-kat.herokuapp.com/](https://meow-kat.herokuapp.com/)
+An app for people to share opinions in just 140 characters. To view our Heroku hosted app [https://meow-twitter-clone.herokuapp.com/](https://meow-twitter-clone.herokuapp.com/)
 
-Our opening plan, in which we detailed the functionality and functions needed to meet the requirements. 
+Our opening plan, in which we detailed the functionality and functions needed to meet the requirements.
 ![readme white board outline](https://files.gitter.im/kat4/fac6d1/k5pM/thumb/IMG_20151009_101637.jpg "readme")
 
 ##Basic Requirements
@@ -13,7 +13,7 @@ Our opening plan, in which we detailed the functionality and functions needed to
       - [X]Create
       - [X]Read
       - []Delete
-- [X] Use Redis on the back-end for the database. 
+- [X] Use Redis on the back-end for the database.
 - [] Use cookies so only the poster can delete their tweets.
 - [X] Real-time Updates of tweets.
 - [X] Testing & 80% code coverage.
@@ -32,4 +32,3 @@ Our opening plan, in which we detailed the functionality and functions needed to
 - Access site on localhost:8000
 
 To see our file structure crystal click on the codecrystal badge at the top of our repo or here> [kat4 crystal](http://codecrystal.herokuapp.com/crystalise/kat4/meow/master)
-
